@@ -57,7 +57,7 @@ describe Stack do
       v2 = 20
       v3 = 30
 
-      [v1, v2, v3].each {|v| stack.push(v)}
+      [v1, v2, v3].each { |v| stack.push(v) }
 
       return_v3 = stack.pop!.value
       return_v2 = stack.pop!.value
@@ -73,7 +73,7 @@ describe Stack do
       # stack should return values in reverse
       values = [1, 2, 3, 4, 5]
       stack = Stack.new
-      values.each {|v| stack.push(v)}
+      values.each { |v| stack.push(v) }
 
       reverse_stack = stack.reverse
       returned_reverse_vals = []
