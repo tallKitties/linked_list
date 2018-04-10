@@ -28,4 +28,17 @@ class Stack
     end
     reversed_stack
   end
+
+  def reverse!
+    node = @data
+    @data = nil
+    reverse_data(node)
+  end
+
+  private
+
+  def reverse_data(node)
+    node.nil? ? return : push(node.value)
+    reverse_data(node.next_node)
+  end
 end

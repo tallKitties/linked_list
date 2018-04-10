@@ -82,4 +82,18 @@ describe Stack do
       expect(returned_reverse_vals).to eq(values)
     end
   end
+
+  describe '#reverse!' do
+    it 'reverses the stack order' do
+      values = [1, 2, 3, 4, 5]
+      stack = Stack.new
+      values.each { |v| stack.push(v) }
+
+      stack.reverse!
+      returned_reverse_vals = []
+      values.size.times { returned_reverse_vals << stack.pop!.value }
+
+      expect(returned_reverse_vals).to eq(values)
+    end
+  end
 end
