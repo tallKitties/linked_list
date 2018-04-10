@@ -35,6 +35,18 @@ class Stack
     reverse_data(node)
   end
 
+  def print_stack
+    node = @data
+    output = ''
+
+    while node
+      output << "#{node.value} --> "
+      node = node.next_node
+    end
+
+    puts output + 'nil'
+  end
+
   private
 
   def reverse_data(node)

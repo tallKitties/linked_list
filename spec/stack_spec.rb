@@ -96,4 +96,27 @@ describe Stack do
       expect(returned_reverse_vals).to eq(values)
     end
   end
+
+  describe '#print' do
+    context 'without nodes on the stack' do
+      it 'should print nil' do
+        stack = Stack.new
+
+        expect(stack).to receive(:puts).with('nil')
+        stack.print_stack
+      end
+    end
+
+    context 'with nodes on the stack' do
+      it 'should print the values' do
+      values = [1, 2, 3, 4, 5]
+      stack = Stack.new
+      values.each { |v| stack.push(v) }
+      expected_output = "5 --> 4 --> 3 --> 2 --> 1 --> nil"
+
+      expect(stack).to receive(:puts).with(expected_output)
+      stack.print_stack
+      end
+    end
+  end
 end
