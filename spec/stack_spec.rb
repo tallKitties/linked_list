@@ -10,12 +10,12 @@ describe Stack do
     end
   end
 
-  describe '#data' do
+  describe '#head' do
     context 'without pushing anything on the stack' do
       it 'should return nil' do
         stack = Stack.new
 
-        expect(stack.data).to be_nil
+        expect(stack.head).to be_nil
       end
     end
 
@@ -24,7 +24,7 @@ describe Stack do
         stack = Stack.new
         stack.push(1)
 
-        expect(stack.data.value).to eq(1)
+        expect(stack.head.value).to eq(1)
       end
     end
   end
@@ -45,7 +45,7 @@ describe Stack do
 
         stack.push(value)
 
-        expect(stack.data.value).to eq(value)
+        expect(stack.head.value).to eq(value)
       end
     end
   end
@@ -80,6 +80,18 @@ describe Stack do
       values.size.times { returned_reverse_vals << reverse_stack.pop!.value }
 
       expect(returned_reverse_vals).to eq(values)
+    end
+
+    it "doesn't mutate the original stack" do
+      values = [1, 2, 3, 4, 5]
+      stack = Stack.new
+      values.each { |v| stack.push(v) }
+
+      reverse_stack = stack.reverse
+      returned_vals = []
+      values.size.times { returned_vals << stack.pop!.value }
+
+      expect(returned_vals).to eq(values.reverse)
     end
   end
 

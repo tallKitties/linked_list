@@ -1,4 +1,8 @@
 # Gemfile
 source "https://rubygems.org"
 
-gem "rspec"
+group :development do
+  gem "rspec"
+  gem "pry"
+  gem "pry-nav"
+end

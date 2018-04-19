@@ -1,56 +1,54 @@
 require_relative "./linked_list_node"
+require "pry"
 
 class Stack
-  attr_reader :data
+  attr_reader :head
 
   def initialize
-    @data = nil
+    @head = nil
   end
 
   def push(value)
-    new_node = LinkedListNode.new(value, @data)
-    @data = new_node
+    new_node = LinkedListNode.new(value, head)
+    @head = new_node
   end
 
   def pop!
-    return nil if @data.nil?
-    top_node = @data
-    @data = top_node.next_node
+    return nil if head.nil?
+    top_node = head
+    @head = top_node.next_node
     top_node
   end
 
-  def reverse
-    reversed_stack = Stack.new
-    node = @data
-    until node.nil?
-      reversed_stack.push(node.value)
-      node = node.next_node
-    end
-    reversed_stack
+  def reverse(node = head, stack = Stack.new)
+    return stack if node.nil?
+
+    stack.push(node.value)
+    reverse(node.next_node, stack)
   end
 
   def reverse!
-    node = @data
-    @data = nil
-    reverse_data(node)
+    @head = reverse_stack(head, nil)
   end
 
   def print_stack
-    node = @data
-    output = ''
-
-    while node
-      output << "#{node.value} --> "
-      node = node.next_node
-    end
-
-    puts output + 'nil'
+    puts create_output_string(head, '')
   end
 
   private
 
-  def reverse_data(node)
-    node.nil? ? return : push(node.value)
-    reverse_data(node.next_node)
+  def create_output_string(node, output)
+    return output << 'nil' if node.nil?
+
+    output << "#{node.value} --> "
+    create_output_string(node.next_node, output)
+  end
+
+  def reverse_stack(node, stack)
+    return stack if node.nil?
+
+    next_node = node.next_node
+    node.next_node = stack
+    reverse_stack(next_node, node)
   end
 end
