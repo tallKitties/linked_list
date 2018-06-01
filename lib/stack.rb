@@ -20,35 +20,41 @@ class Stack
     top_node
   end
 
-  def reverse(node = head, stack = Stack.new)
-    return stack if node.nil?
-
-    stack.push(node.value)
-    reverse(node.next_node, stack)
+  def reverse
+    _reverse(head)
   end
 
   def reverse!
-    @head = reverse_stack(head, nil)
+    node = head
+    @head = nil
+    _reverse!(node)
   end
 
   def print_stack
-    puts create_output_string(head, '')
+    puts _create_output_string(head, '')
   end
 
   private
 
-  def create_output_string(node, output)
+
+  def _create_output_string(node, output)
     return output << 'nil' if node.nil?
 
     output << "#{node.value} --> "
-    create_output_string(node.next_node, output)
+    _create_output_string(node.next_node, output)
   end
 
-  def reverse_stack(node, stack)
+  def _reverse(node, stack = Stack.new)
     return stack if node.nil?
 
-    next_node = node.next_node
-    node.next_node = stack
-    reverse_stack(next_node, node)
+    stack.push(node.value)
+    _reverse(node.next_node, stack)
+  end
+
+  def _reverse!(node)
+    return if node.nil?
+
+    push(node.value)
+    _reverse!(node.next_node)
   end
 end

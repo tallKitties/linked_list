@@ -96,7 +96,7 @@ describe Stack do
   end
 
   describe '#reverse!' do
-    it 'reverses the stack order' do
+    it 'mutates the stack to reverse its order' do
       values = [1, 2, 3, 4, 5]
       stack = Stack.new
       values.each { |v| stack.push(v) }
