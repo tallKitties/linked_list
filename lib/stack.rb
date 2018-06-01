@@ -36,7 +36,6 @@ class Stack
 
   private
 
-
   def _create_output_string(node, output)
     return output << 'nil' if node.nil?
 
