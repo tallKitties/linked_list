@@ -9,8 +9,7 @@ class Stack
   end
 
   def push(value)
-    new_node = LinkedListNode.new(value, head)
-    @head = new_node
+    @head = LinkedListNode.new(value, head)
   end
 
   def pop!
@@ -25,9 +24,9 @@ class Stack
   end
 
   def reverse!
-    node = head
-    @head = nil
-    _reverse!(node)
+    tail = head.next_node
+    @head.next_node = nil
+    @head = _reverse!(head, tail)
   end
 
   def print_stack
@@ -50,10 +49,11 @@ class Stack
     _reverse(node.next_node, stack)
   end
 
-  def _reverse!(node)
-    return if node.nil?
+  def _reverse!(new_head, tail)
+    return new_head if tail.nil?
 
-    push(node.value)
-    _reverse!(node.next_node)
+    previous_node = tail.next_node
+    tail.next_node = new_head
+    _reverse!(tail, previous_node)
   end
 end
