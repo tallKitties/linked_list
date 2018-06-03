@@ -26,7 +26,8 @@ class Stack
   def reverse!
     tail = head.next_node
     @head.next_node = nil
-    @head = _reverse!(head, tail)
+
+    _reverse!(tail, tail.next_node)
   end
 
   def print_stack
@@ -49,11 +50,11 @@ class Stack
     _reverse(node.next_node, stack)
   end
 
-  def _reverse!(new_head, tail)
-    return new_head if tail.nil?
+  def _reverse!(node_tail, previous_node)
+    node_tail.next_node = head
+    @head = node_tail
+    return if previous_node.nil?
 
-    previous_node = tail.next_node
-    tail.next_node = new_head
-    _reverse!(tail, previous_node)
+    _reverse!(previous_node, previous_node.next_node)
   end
 end
